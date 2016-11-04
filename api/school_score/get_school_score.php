@@ -8,11 +8,15 @@
 include "./init.php";
 $tool = new Tool('http://data.api.gkcx.eol.cn');
 $db   = new DB('115.159.54.210', 'Liu', 'qq470401911', 'gaokao');
-
+$conn = $db->getConn();
 
 
 //大学录取分数线
 $url = "http://data.api.gkcx.eol.cn/soudaxue/queryProvinceScore.html?messtype=jsonp&url_sign=queryProvinceScore&page=1&size=50&province=内蒙古&fsyear=2015&callback=jQuery183009280941664946574_1478267670060&_=1478267681103";
+
+$data = $tool->cURL($url);
+
+var_dump($data);
 /*
  * {
     "schoolid": "46",                   //学校id
