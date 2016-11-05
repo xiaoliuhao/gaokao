@@ -7,7 +7,7 @@
  */
 include "./init.php";
 
-ini_set("max_execution_time", "0");
+
 ini_set('memory_limit','512M');
 $stime = microtime(true);
 
@@ -57,10 +57,6 @@ foreach($data_arr as $schools){
 
 
 
-function write_data($file_path, $json){
-    $file=fopen($file_path,"a+");
-    fwrite($file,$json);
-    fclose($file);
-}
+
 
 //echo json_encode($data_arr);

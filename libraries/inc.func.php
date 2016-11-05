@@ -7,7 +7,7 @@
  */
 function tips($str){
     for($j = 1; $j <= 4096; $j++ ) print(' ');
-    echo '<br>'.$str.'<br>';
+    echo '<br>'.$str.date('Y-m-d H:i:s').'<br>';
     ob_flush();
     flush();
 }
@@ -31,7 +31,16 @@ function write_error($data = array()){
     $str = '添加';
 
     foreach($data as $key => $value) {
-        $str .= " {$key}:{$value} ";
+
+        if(is_array($value)){
+            $value_tmp = '';
+            foreach($value as $value2){
+                $value_tmp .= "$value2";
+            }
+            $str .= " {$key}:{$value_tmp} ";
+        }else {
+            $str .= " {$key}:{$value} ";
+        }
     }
 
     $str .= "错误".date('Y-m-d H:i:s')."\r\n";
@@ -47,4 +56,10 @@ function object_to_array($obj){
         $arr[$key] = $val;
     }
     return $arr;
+}
+
+function write_data($file_path, $json){
+    $file=fopen($file_path,"a+");
+    fwrite($file,$json);
+    fclose($file);
 }

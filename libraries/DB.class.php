@@ -59,7 +59,17 @@ class DB{
 //        $sql 	= mysql_real_escape_string($sql.$keys.$values);
 //        echo $sql.'<br>';
         $result = mysql_query($sql,$conn);
-
+        if(!$result){
+            $this->write_error($sql);
+        }
         return $result;
+    }
+
+    private function write_error($str){
+        $file_path = '../../error/sql_error_log.txt';
+        $file=fopen($file_path,"a+");
+        $str = date('Y-m-d H:i:s').": \r\n".$str."\r\n";
+        fwrite($file, $str);
+        fclose($file);
     }
 }
