@@ -4,6 +4,9 @@
  * User: Liu
  * Date: 2016/11/4
  * Time: 22:38
+ * 2016 11 05 22:17
+ * 2014年:(172/259),已执行4095.50908494,本次存入50/502016-11-05 22:04:34
+ *
  */
 
 
@@ -21,7 +24,7 @@ $url = "http://data.api.gkcx.eol.cn/soudaxue/querySpecialtyScore.html?messtype=j
 
 $all_data = array();
 $j = 0;
-for($year=2013 ; $year<=2015; $year++) {
+for($year=2015 ; $year <= 2015; $year++) {
     $all_data[$year] = array();
     $foreach_times = get_search_time($tool, $url, $year);
     for ($i = 1; $i <= $foreach_times; $i++) {
@@ -77,7 +80,7 @@ write_data('./zhuanye_score.json',json_encode($all_data));
 
 
 function get_search_time($tool, $url, $year){
-    $content = $tool->cURL($url);
+    $content = $tool->cURL($url.$year);
     $data = json_decode($content);
     $all  = $data->totalRecord->num;
     $foreach_times = (int)($all/50)+1;
